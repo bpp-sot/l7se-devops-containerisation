@@ -48,21 +48,21 @@ docker run --rm alpine ls /tmp/
 Create a local directory and mount it into a container:
 
 ```bash
-mkdir -p /tmp/my-site
+mkdir -p ~/my-site
 
-echo "<h1>Hello from the host!</h1>" > /tmp/my-site/index.html
+echo "<h1>Hello from the host</h1>" > ~/my-site/index.html
 
 docker run -d \
   --name live-server \
   -p 8080:80 \
-  -v /tmp/my-site:/usr/share/nginx/html:ro \
+  -v ~/my-site:/usr/share/nginx/html:ro \
   nginx:alpine
 ```
 
 Open port 8080 in your browser. Now edit the file on the host:
 
 ```bash
-echo "<h1>I changed this on the host! 🎉</h1>" > /tmp/my-site/index.html
+echo "<h1>I changed this on the host</h1>" > ~/my-site/index.html
 ```
 
 Refresh your browser — the change is reflected immediately without
