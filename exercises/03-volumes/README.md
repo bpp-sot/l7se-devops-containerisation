@@ -30,13 +30,13 @@ Docker provides two main mechanisms:
 
 ```bash
 # Create a container, write a file inside it, then exit
-docker run --name ephemeral alpine sh -c "echo 'I exist' > /data/test.txt && cat /data/test.txt"
+docker run --name ephemeral alpine sh -c "echo 'I exist' > /tmp/test.txt && cat /tmp/test.txt"
 
 # Remove the container
 docker rm ephemeral
 
 # Try to recover the file — it's gone
-docker run --rm alpine ls /data/
+docker run --rm alpine ls /tmp/
 ```
 
 **Question:** When is ephemeral storage actually desirable?
