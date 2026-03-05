@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compose Stack</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 4rem auto; padding: 0 1rem; }
+    .status { padding: 1rem; background: #e6f4ea; border-left: 4px solid #34a853; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>🐳 Docker Compose Stack</h1>
+  <div class="status">
+    <strong>Web service is running!</strong><br>
+    The database is running on the internal <code>app-network</code>.<br>
+    It is not accessible from outside the Docker network.
+  </div>
+  <p>Edit <code>exercises/05-compose/site/index.html</code> and run
+     <code>docker compose up -d</code> to see changes.</p>
+</body>
+</html>

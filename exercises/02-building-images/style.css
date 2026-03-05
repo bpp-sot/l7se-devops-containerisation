@@ -1,0 +1,21 @@
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+main {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  max-width: 600px;
+}
+
+h1 { font-size: 2rem; margin-bottom: 1rem; }
+code { background: #161b22; padding: 0.2em 0.4em; border-radius: 4px; }

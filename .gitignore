@@ -1,0 +1,24 @@
+# Docker
+.docker/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Editor
+.vscode/settings.json
+*.swp
+*~
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

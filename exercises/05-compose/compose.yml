@@ -1,0 +1,56 @@
+# compose.yml — a simple web application stack
+#
+# Services:
+#   web  — Nginx serving a static site (or reverse proxy)
+#   db   — PostgreSQL database (internal only, not published to host)
+#
+# Usage:
+#   docker compose up -d
+#   docker compose logs -f
+#   docker compose down
+
+name: containerisation-exercise-05
+
+services:
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: changeme          # Use secrets in production!
+      POSTGRES_DB: appdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - app-network
+    # Note: the database is NOT published to the host — only accessible
+    # to other containers on app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

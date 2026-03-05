@@ -1,0 +1,51 @@
+{
+  "name": "Containerisation Playground",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  // Docker-in-Docker: gives each learner a fully isolated Docker daemon
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    },
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  // Useful VS Code extensions for working with containers and code
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.makefile-tools",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "docker.showStartPage": false,
+        "files.autoSave": "onFocusChange",
+        "editor.formatOnSave": true,
+        "editor.rulers": [80]
+      }
+    }
+  },
+
+  // Forward common ports so learners can open containerised web apps in their browser
+  "forwardPorts": [3000, 5000, 8000, 8080, 9000],
+  "portsAttributes": {
+    "3000": { "label": "App (3000)", "onAutoForward": "notify" },
+    "5000": { "label": "App (5000)", "onAutoForward": "notify" },
+    "8000": { "label": "App (8000)", "onAutoForward": "notify" },
+    "8080": { "label": "App (8080)", "onAutoForward": "notify" }
+  },
+
+  // Run once the container is created
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // Run on every start to ensure the Docker daemon is healthy
+  "postStartCommand": "docker info > /dev/null 2>&1 && echo '✅ Docker daemon is running' || echo '⚠️  Docker daemon not ready yet — try reopening the terminal'",
+
+  "remoteUser": "vscode"
+}
